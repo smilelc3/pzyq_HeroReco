@@ -1,6 +1,6 @@
 import multiprocessing
 import os
-from img_class import PipeImg
+from 界面.img_class import PipeImg
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import time

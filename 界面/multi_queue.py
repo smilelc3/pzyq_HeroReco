@@ -1,14 +1,13 @@
 
 import os
-from img_class import PipeImg
+from 界面.img_class import PipeImg
 from multiprocessing import Process, Queue, Event
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-import numpy as np
 import time
 
 # 设置队列最大容许长度，避免可能超内存
-MAX_QUEUE_SIZE = 50
+MAX_QUEUE_SIZE = 100
 
 # 读取图片转np
 def read_img_to_np(path):
@@ -49,12 +48,14 @@ def consumer(queue:Queue, event:Event):
             return
 
 if __name__=='__main__':
+
     # 父进程创建Queue，并传给各个子进程：
     img_queue = Queue()
     img_event = Event()
     input_q = Process(target=producer, args=(img_queue,img_event))
     output_q = Process(target=consumer, args=(img_queue,img_event))
 
+    time1 = time.time()
     # 启动子进程input_q，写入:
     input_q.start()
     # 启动子进程output_q，读取:
@@ -63,4 +64,6 @@ if __name__=='__main__':
     # 等待结束
     input_q.join()
     output_q.join()
+    time2 = time.time()
 
+    print(time2 - time1)

@@ -141,7 +141,7 @@ def get_all_img_path(path)->list:
 if __name__ == '__main__':
 
     identify = Dec(binaryMethod='Otsu')
-    file_list = get_all_img_path('/home/smile/PycharmProjects/pzyq_identification/单据扫描20180927')
+    file_list = get_all_img_path('../单据扫描20180927')
     print(file_list)
     for file in file_list:
         identify.set_img_from_file(file)
