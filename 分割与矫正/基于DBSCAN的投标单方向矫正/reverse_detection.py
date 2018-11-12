@@ -1,5 +1,5 @@
 import cv2
-import 基于DBSCAN的投标单方向矫正.const as const
+import 分割与矫正.基于DBSCAN的投标单方向矫正.const as const
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.cluster import DBSCAN
@@ -41,7 +41,7 @@ class Dec(object):
         self.preProcessImg = cv2.cvtColor(self.rawImg, cv2.COLOR_BGR2GRAY)
         self.preProcessImg = cv2.resize(self.preProcessImg,
                                         dsize=None,
-                                        fx=const.RESIZE_PER,            # 指定长宽比放缩
+                                        fx=const.RESIZE_PER,  # 指定长宽比放缩
                                         fy=const.RESIZE_PER,
                                         interpolation=cv2.INTER_NEAREST)   # 采用最快的临近插值算法
         if self.binaryMethod == 'Otsu':

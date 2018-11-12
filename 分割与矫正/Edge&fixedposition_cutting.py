@@ -1,5 +1,4 @@
-# -*-encoding:utf-8-*-
-# @author:Louis
+# @author:zdd
 
 import cv2
 import numpy as np
@@ -8,13 +7,13 @@ from matplotlib import pyplot as plt
 # 主体框分割算法
 def cutting(img:np):
     # 获取图片
-    '''
+    """
         其中各参数所表达的意义：
         src：原图像；
         d：像素的邻域直径，可有sigmaColor和sigmaSpace计算可得；
         sigmaColor：颜色空间的标准方差，一般尽可能大；
         sigmaSpace：坐标空间的标准方差(像素单位)，一般尽可能小。
-    '''
+    """
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (9, 9), 0)  # 高斯去噪(会出现上边部分缺失)
     # blurred = cv2.bilateralFilter(src=gray, d=0, sigmaColor=100, sigmaSpace=15)  # 高斯双边滤波(会出现只有条形码)
@@ -138,7 +137,7 @@ def zfcutfixde_show(crop_img: np):
 
 
 if __name__ == '__main__':
-    img = cv2.imread('/home/smile/PycharmProjects/pzyq_identification/分割与矫正/1.jpg')
+    img = cv2.imread('1.jpg')
     crop_img = cutting(img)
     zfcutfixde_show(crop_img)
 
