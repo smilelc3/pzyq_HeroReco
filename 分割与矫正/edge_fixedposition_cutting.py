@@ -51,10 +51,12 @@ def cutting(img:np):
     # draw_img = cv2.drawContours(img.copy(), [box], -1, (0, 0, 255), 3)
 
     main_img = perspective_vertical_correction(img, box)
-    return main_img
+
+    # 进行一次尺寸变换，ppi=300
+    result_img = Fixedpoint_cutting(main_img)
+    return result_img
 
 # 透视变换+垂直矫正+切割
-
 def perspective_vertical_correction(img, box: list) -> np:
     from operator import itemgetter
     # box可能乱序，需要重新排序
@@ -83,9 +85,8 @@ def perspective_vertical_correction(img, box: list) -> np:
     return dst[388: 1677, 66: 2415]
 
 # 按像素点切割
-def Fixedpoint_cutting(tailorpic: np) -> dict:
-    #print('height:', len(self.filename))
-    #print('width:', len(self.filename[0]))
+def Fixedpoint_cutting(img: np) -> dict:
+    tailorpic = cv2.resize(img, (2349,1289), interpolation=cv2.INTER_CUBIC)
     # 玉石编号
     region_yushi = tailorpic[3:207, 516:1177]
     dx = (1177-516)/5
@@ -129,11 +130,7 @@ def Fixedpoint_cutting(tailorpic: np) -> dict:
 
 
 # 主要用以绘图展示
-def zfcutfixde_show(crop_img: np):
-    # 进行一次尺寸变换，ppi=300
-    crop_img = cv2.resize(crop_img, (2349,1289), interpolation=cv2.INTER_CUBIC)
-
-    result_img = Fixedpoint_cutting(crop_img)
+def zfcutfixde_show(result_img: np):
     stone_num = result_img['stone_num']
     bottomprice = result_img['bottomprice']
     bid_prices_Lowercase =  result_img['priceLowercase']
@@ -160,12 +157,10 @@ def zfcutfixde_show(crop_img: np):
 
 
 if __name__ == '__main__':
-    for i in range(200, 293 + 1):
-        try:
-            img = plt.imread(r'人工填写20181122/%04d.jpg'%i)
-            crop_img = cutting(img)
-            zfcutfixde_show(crop_img)
-        except FileNotFoundError:
-            pass
+    img = plt.imread(r'0001.jpg')
+    crop_img = cutting(img)
+
+    zfcutfixde_show(crop_img)
+
 
 
