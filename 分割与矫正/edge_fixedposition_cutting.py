@@ -159,7 +159,6 @@ def zfcutfixde_show(result_img: np):
 if __name__ == '__main__':
     img = plt.imread(r'0001.jpg')
     crop_img = cutting(img)
-
     zfcutfixde_show(crop_img)
 
 

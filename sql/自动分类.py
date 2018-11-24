@@ -13,7 +13,9 @@ if __name__ == '__main__':
 
             # 处理会员编号
             vip_num = img_txt[1].strip()
-            for index, val in enumerate(vip_num):
+
+            for index, val in enumerate(vip_num.strip()):
+                print(index)
                 plt.imshow(crop_img['stone_num'][1][index])
                 plt.show()
                 print('val:', val)
