@@ -29,7 +29,7 @@ def cutting(img:np):
     blurred = cv2.GaussianBlur(gradient, (9, 9), 0)
     (_, thresh) = cv2.threshold(blurred, 90, 255, cv2.THRESH_BINARY)  # 用于获取二元值的灰度图像
     # 建立一个椭圆核函数
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (20, 20))  # OpenCV定义的结构元素
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))  # OpenCV定义的结构元素
     # 执行图像形态学, 细节直接查文档，很简单
     closed = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)  # 闭运算
     # 先膨胀后腐蚀的操作称之为闭操作。它具有填充物体内细小空洞，连接邻近物体和平滑边界的作用
@@ -47,6 +47,9 @@ def cutting(img:np):
     # 因为这个函数有极强的破坏性，所有需要在img.copy()上画
     # draw a bounding box arounded the detected barcode and display the image
     draw_img = cv2.drawContours(img.copy(), [box], -1, (0, 0, 255), 3)
+
+    plt.imshow(draw_img)
+    plt.show()
     Xs = [i[0] for i in box]
     Ys = [i[1] for i in box]
     x1 = min(Xs)
@@ -137,8 +140,15 @@ def zfcutfixde_show(crop_img: np):
 
 
 if __name__ == '__main__':
-    img = cv2.imread('1.jpg')
-    crop_img = cutting(img)
-    zfcutfixde_show(crop_img)
+
+    import time
+
+    for i in range(1, 293 + 1):
+        try:
+            img = plt.imread(r'人工填写20181122/%04d.jpg'%i)
+            crop_img = cutting(img)
+            zfcutfixde_show(crop_img)
+        except FileNotFoundError:
+            pass
 
 
