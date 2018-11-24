@@ -3,7 +3,7 @@
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
-
+from 分割与矫正.reverse_recognition import is_reverse_detection
 # 主体框分割算法
 def cutting(img:np):
     # 获取图片
@@ -14,6 +14,9 @@ def cutting(img:np):
         sigmaColor：颜色空间的标准方差，一般尽可能大；
         sigmaSpace：坐标空间的标准方差(像素单位)，一般尽可能小。
     """
+
+    if is_reverse_detection(img):
+        img = cv2.flip(img, -1)     # 水平垂直翻转
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (9, 9), 0)  # 高斯去噪(会出现上边部分缺失)
     # blurred = cv2.bilateralFilter(src=gray, d=0, sigmaColor=100, sigmaSpace=15)  # 高斯双边滤波(会出现只有条形码)
@@ -48,8 +51,6 @@ def cutting(img:np):
     # draw_img = cv2.drawContours(img.copy(), [box], -1, (0, 0, 255), 3)
 
     main_img = perspective_vertical_correction(img, box)
-    plt.imshow(main_img)
-    plt.show()
     return main_img
 
 # 透视变换+垂直矫正+切割
@@ -58,7 +59,7 @@ def perspective_vertical_correction(img, box: list) -> np:
     from operator import itemgetter
     # box可能乱序，需要重新排序
     meanX = np.mean([p[0] for p in box])
-    meanY = np.mean([p[0] for p in box])
+    meanY = np.mean([p[1] for p in box])
     # print(box, meanX, meanY)
     for point in box:
         if point[0] < meanX and point[1] < meanY:
@@ -79,7 +80,7 @@ def perspective_vertical_correction(img, box: list) -> np:
     dst = cv2.warpPerspective(img, M, (2480, 1748))
     # plt.imshow(dst)
     # plt.show()
-    return dst[ 388: 1677, 66: 2415]
+    return dst[388: 1677, 66: 2415]
 
 # 按像素点切割
 def Fixedpoint_cutting(tailorpic: np) -> dict:
@@ -159,10 +160,7 @@ def zfcutfixde_show(crop_img: np):
 
 
 if __name__ == '__main__':
-
-    import time
-
-    for i in range(1, 293 + 1):
+    for i in range(200, 293 + 1):
         try:
             img = plt.imread(r'人工填写20181122/%04d.jpg'%i)
             crop_img = cutting(img)
