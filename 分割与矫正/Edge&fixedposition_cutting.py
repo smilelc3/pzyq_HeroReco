@@ -43,24 +43,43 @@ def cutting(img:np):
     # compute the rotated bounding box of the largest contour
     rect = cv2.minAreaRect(c)  # 返回点集cnt的最小外接矩形
     box = np.int0(cv2.boxPoints(rect))  # 找到定位标记的矩形包围盒
-
     # 因为这个函数有极强的破坏性，所有需要在img.copy()上画
     # draw a bounding box arounded the detected barcode and display the image
-    draw_img = cv2.drawContours(img.copy(), [box], -1, (0, 0, 255), 3)
+    # draw_img = cv2.drawContours(img.copy(), [box], -1, (0, 0, 255), 3)
 
-    plt.imshow(draw_img)
+    main_img = perspective_vertical_correction(img, box)
+    plt.imshow(main_img)
     plt.show()
-    Xs = [i[0] for i in box]
-    Ys = [i[1] for i in box]
-    x1 = min(Xs)
-    x2 = max(Xs)
-    y1 = min(Ys)
-    y2 = max(Ys)
-    hight = y2 - y1
-    width = x2 - x1
-    crop_img = img[y1:y1 + hight, x1:x1 + width]
+    return main_img
 
-    return crop_img
+# 透视变换+垂直矫正+切割
+
+def perspective_vertical_correction(img, box: list) -> np:
+    from operator import itemgetter
+    # box可能乱序，需要重新排序
+    meanX = np.mean([p[0] for p in box])
+    meanY = np.mean([p[0] for p in box])
+    # print(box, meanX, meanY)
+    for point in box:
+        if point[0] < meanX and point[1] < meanY:
+            x1, y1 = point
+        if point[0] > meanX and point[1] < meanY:
+            x2, y2 = point
+        if point[0] < meanX and point[1] > meanY:
+            x3, y3 = point
+        if point[0] > meanX and point[1] > meanY:
+            x4, y4 = point
+
+    # 生成透视变换矩阵，需要两个对应矩阵
+    pts1 = np.float32([[x1, y1], [x2, y2], [x3, y3], [x4, y4]])  # 原图四个像素点
+    # print([x1, y1], [x2, y2], [x3, y3], [x4, y4])
+    pts2 = np.float32([[66, 388], [2415, 388], [66, 1677], [2415, 1677]])  # 变换后分别在左上、右上、左下、右下四个点
+    # 进行透视变换
+    M = cv2.getPerspectiveTransform(pts1, pts2)
+    dst = cv2.warpPerspective(img, M, (2480, 1748))
+    # plt.imshow(dst)
+    # plt.show()
+    return dst[ 388: 1677, 66: 2415]
 
 # 按像素点切割
 def Fixedpoint_cutting(tailorpic: np) -> dict:
