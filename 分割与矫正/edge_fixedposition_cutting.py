@@ -142,7 +142,7 @@ def zfcutfixde_show(result_img: np):
     plt.subplot(421)
     plt.imshow(stone_num[0])
     plt.subplot(422)
-    plt.imshow(bottomprice[0])
+    plt.imshow(bottomprice[1][0])
     plt.subplot(423)
     plt.imshow(bid_prices_Lowercase[0])
     plt.subplot(424)
@@ -159,6 +159,7 @@ def zfcutfixde_show(result_img: np):
 if __name__ == '__main__':
     img = plt.imread(r'0001.jpg')
     crop_img = cutting(img)
+
     zfcutfixde_show(crop_img)
 
 
