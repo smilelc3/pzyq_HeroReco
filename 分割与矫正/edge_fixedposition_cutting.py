@@ -90,31 +90,31 @@ def Fixedpoint_cutting(img: np) -> dict:
     # 玉石编号
     region_yushi = tailorpic[3:207, 516:1177]
     dx = (1177-516)/5
-    imgstone = region_yushi[3:207, 0:int(dx)],region_yushi[3:207, int(dx):int(dx*2)],region_yushi[3:207, int(dx*2):int(dx*3)],region_yushi[3:207, int(dx*3):int(dx*4)],region_yushi[3:207, int(dx*4):int(dx*5)]
+    imgstone = region_yushi[0:204, 0:int(dx)],region_yushi[0:204, int(dx):int(dx*2)],region_yushi[0:204, int(dx*2):int(dx*3)],region_yushi[0:204, int(dx*3):int(dx*4)],region_yushi[0:204, int(dx*4):int(dx*5)]
     # 玉石底价
     region_pricebottom = tailorpic[88:207, 1518:2346]
     dx = (2346-1518) / 8
-    imgbottom_price = region_pricebottom[88:207, 0:int(dx)], region_pricebottom[88:207, int(dx):int(dx*2)], region_pricebottom[88:207, int(dx*2):int(dx*3)], region_pricebottom[88:207, int(dx*3):int(dx*4)], region_pricebottom[88:207, int(dx*4):int(dx*5)], region_pricebottom[88:207, int(dx*5):int(dx*6)], region_pricebottom[88:207, int(dx*6):int(dx*7)], region_pricebottom[88:207, int(dx*7):int(dx*8)]
+    imgbottom_price = region_pricebottom[0:119, 0:int(dx)], region_pricebottom[0:119, int(dx):int(dx*2)], region_pricebottom[0:119, int(dx*2):int(dx*3)], region_pricebottom[0:119, int(dx*3):int(dx*4)], region_pricebottom[0:119, int(dx*4):int(dx*5)], region_pricebottom[0:119, int(dx*5):int(dx*6)], region_pricebottom[0:119, int(dx*6):int(dx*7)], region_pricebottom[0:119, int(dx*7):int(dx*8)]
     # 小写报价
     region_priceLeast = tailorpic[282:378, 624:2346]
     dx = (2346-624) / 8
-    imgbid_prices_Lowercase = region_priceLeast[282:378, 0:int(dx)], region_priceLeast[282:378, int(dx):int(dx*2)], region_priceLeast[282:378, int(dx*2):int(dx*3)], region_priceLeast[282:378, int(dx*3):int(dx*4)], region_priceLeast[282:378, int(dx*4):int(dx*5)], region_priceLeast[282:378, int(dx*5):int(dx*6)], region_priceLeast[282:378, int(dx*6):int(dx*7)], region_priceLeast[282:378, int(dx*7):int(dx*8)]
+    imgbid_prices_Lowercase = region_priceLeast[0:378-282, 0:int(dx)], region_priceLeast[0:378-282, int(dx):int(dx*2)], region_priceLeast[0:378-282, int(dx*2):int(dx*3)], region_priceLeast[0:378-282, int(dx*3):int(dx*4)], region_priceLeast[0:378-282, int(dx*4):int(dx*5)], region_priceLeast[0:378-282, int(dx*5):int(dx*6)], region_priceLeast[0:378-282, int(dx*6):int(dx*7)], region_priceLeast[0:378-282, int(dx*7):int(dx*8)]
     # 大写报价
     region_priceMost = tailorpic[373:563, 624:2346]
     dx = (2346-624) / 8
-    imgbid_prices_Uppercase = region_priceMost[373:563, 0:int(dx)], region_priceMost[373:563, int(dx):int(dx*2)], region_priceMost[373:563, int(dx*2):int(dx*3)], region_priceMost[373:563, int(dx*3):int(dx*4)], region_priceMost[373:563, int(dx*4):int(dx*5)], region_priceMost[373:563, int(dx*5):int(dx*6)], region_priceMost[373:563, int(dx*6):int(dx*7)], region_priceMost[282:378, int(dx*7):int(dx*8)]
+    imgbid_prices_Uppercase = region_priceMost[0:563-373, 0:int(dx)], region_priceMost[0:563-373, int(dx):int(dx*2)], region_priceMost[0:563-373, int(dx*2):int(dx*3)], region_priceMost[0:563-373, int(dx*3):int(dx*4)], region_priceMost[0:563-373, int(dx*4):int(dx*5)], region_priceMost[0:563-373, int(dx*5):int(dx*6)], region_priceMost[0:563-373, int(dx*6):int(dx*7)], region_priceMost[0:563-373, int(dx*7):int(dx*8)]
     # 会员号码
     region_Membersnum = tailorpic[558:729, 693:1177]
-    dx = (1177-693)/8
-    imgMember_num = region_Membersnum[558:729, 0:int(dx)], region_Membersnum[558:729, int(dx):int(dx*2)], region_Membersnum[558:729, int(dx*2):int(dx*3)], region_Membersnum[558:729, int(dx*3):int(dx*4)], region_Membersnum[558:729, int(dx*4):int(dx*5)]
+    dx = (1177-693)/5
+    imgMember_num = region_Membersnum[0:729-558, 0:int(dx)], region_Membersnum[0:729-558, int(dx):int(dx*2)], region_Membersnum[0:729-558, int(dx*2):int(dx*3)], region_Membersnum[0:729-558, int(dx*3):int(dx*4)], region_Membersnum[0:729-558, int(dx*4):int(dx*5)]
     # 会员姓名
     region_Membersname = tailorpic[724:899, 632:1177]
     dx = (1177-632)/4
-    imgMembers_name = region_Membersname[724:899, 0:int(dx)], region_Membersname[724:899, int(dx):int(dx*2)], region_Membersname[724:899, int(dx*2):int(dx*3)], region_Membersname[724:899, int(dx*3):int(dx*4)]
+    imgMembers_name = region_Membersname[0:899-724, 0:int(dx)], region_Membersname[0:899-724, int(dx):int(dx*2)], region_Membersname[0:899-724, int(dx*2):int(dx*3)], region_Membersname[0:899-724, int(dx*3):int(dx*4)]
     # 会员电话
     region_Membersphone = tailorpic[558:729, 1541:2346]
     dx = (2346-1541)/11
-    imgMember_phone = region_Membersphone[558:729, 0:int(dx)], region_Membersphone[558:729, int(dx):int(dx*2)], region_Membersphone[558:729, int(dx*2):int(dx*3)], region_Membersphone[558:729, int(dx*3):int(dx*4)], region_Membersphone[558:729, int(dx*4):int(dx*5)], region_Membersphone[558:729, int(dx*5):int(dx*6)], region_Membersphone[558:729, int(dx*6):int(dx*7)], region_Membersphone[558:729, int(dx*7):int(dx*8)], region_Membersphone[558:729, int(dx*8):int(dx*9)], region_Membersphone[558:729, int(dx*9):int(dx*10)], region_Membersphone[558:729, int(dx*10):int(dx*11)]
+    imgMember_phone = region_Membersphone[0:729-558, 0:int(dx)], region_Membersphone[0:729-558, int(dx):int(dx*2)], region_Membersphone[0:729-558, int(dx*2):int(dx*3)], region_Membersphone[0:729-558, int(dx*3):int(dx*4)], region_Membersphone[0:729-558, int(dx*4):int(dx*5)], region_Membersphone[0:729-558, int(dx*5):int(dx*6)], region_Membersphone[0:729-558, int(dx*6):int(dx*7)], region_Membersphone[0:729-558, int(dx*7):int(dx*8)], region_Membersphone[0:729-558, int(dx*8):int(dx*9)], region_Membersphone[0:729-558, int(dx*9):int(dx*10)], region_Membersphone[0:729-558, int(dx*10):int(dx*11)]
 
     # 返回字典
     saveimg = {
@@ -140,19 +140,19 @@ def zfcutfixde_show(result_img: np):
     Members_phone = result_img['Memberphone']
 
     plt.subplot(421)
-    plt.imshow(stone_num[0])
+    plt.imshow(stone_num[1][0])
     plt.subplot(422)
-    plt.imshow(bottomprice[1][0])
+    plt.imshow(bottomprice[1][2])
     plt.subplot(423)
-    plt.imshow(bid_prices_Lowercase[0])
+    plt.imshow(bid_prices_Lowercase[1][4])
     plt.subplot(424)
-    plt.imshow(bid_prices_Uppercase[0])
+    plt.imshow(bid_prices_Uppercase[1][2])
     plt.subplot(425)
-    plt.imshow(Members_num[0])
+    plt.imshow(Members_num[1][4])
     plt.subplot(426)
-    plt.imshow(Members_phone[0])
+    plt.imshow(Members_phone[1][3])
     plt.subplot(427)
-    plt.imshow(Members_name[0])
+    plt.imshow(Members_name[1][3])
     plt.show()
 
 
