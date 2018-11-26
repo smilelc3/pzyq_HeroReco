@@ -7,9 +7,9 @@ import time
 if __name__ == '__main__':
     for i in range(1, 293 + 1):
         try:
-            img = plt.imread(r'人工填写20181122/%04d.jpg' % i)
-            print(r'人工填写20181122/%04d.jpg' % i)
-            img_txt = open(r'人工填写20181122/%04d.txt' % i, 'r', encoding='utf-8').readlines()
+            img = plt.imread(r'人工填写20181126/%04d.jpg' % i)
+            print(r'人工填写20181126/%04d.jpg' % i)
+            img_txt = open(r'人工填写20181126/%04d.txt' % i, 'r', encoding='utf-8').readlines()
             crop_img = cutting(img)
 
             # 处理会员编号
@@ -23,7 +23,7 @@ if __name__ == '__main__':
                     print(file_name)
                     plt.imsave(file_name, crop_img['stone_num'][1][index])
                 except:
-                    print('ERROR:', r'人工填写20181122/%04d.txt' % i)
+                    print('ERROR:', r'人工填写20181126/%04d.txt' % i)
 
 
             # 处理底标价
@@ -37,7 +37,7 @@ if __name__ == '__main__':
                     print(file_name)
                     plt.imsave(file_name, crop_img['bottomprice'][1][index])
                 except:
-                    print('ERROR:', r'人工填写20181122/%04d.txt' % i)
+                    print('ERROR:', r'人工填写20181126/%04d.txt' % i)
 
             # 处理投标价（小写）
             vip_num = img_txt[3].strip()
@@ -50,7 +50,7 @@ if __name__ == '__main__':
                     print(file_name)
                     plt.imsave(file_name, crop_img['priceLowercase'][1][index])
                 except:
-                    print('ERROR:', r'人工填写20181122/%04d.txt' % i)
+                    print('ERROR:', r'人工填写20181126/%04d.txt' % i)
 
             # 处理投标价（大写）
             vip_num = img_txt[3].strip()
@@ -63,7 +63,7 @@ if __name__ == '__main__':
                     print(file_name)
                     plt.imsave(file_name, crop_img['priceUppercase'][1][index])
                 except:
-                    print('ERROR:', r'人工填写20181122/%04d.txt' % i)
+                    print('ERROR:', r'人工填写20181126/%04d.txt' % i)
 
             # 处理会员号码
             vip_num = img_txt[4].strip()
@@ -76,7 +76,7 @@ if __name__ == '__main__':
                     print(file_name)
                     plt.imsave(file_name, crop_img['Membernum'][1][index])
                 except:
-                    print('ERROR:', r'人工填写20181122/%04d.txt' % i)
+                    print('ERROR:', r'人工填写20181126/%04d.txt' % i)
             
             # 处理电话
             vip_num = img_txt[5].strip()
@@ -89,7 +89,7 @@ if __name__ == '__main__':
                     print(file_name)
                     plt.imsave(file_name, crop_img['Memberphone'][1][index])
                 except:
-                    print('ERROR:', r'人工填写20181122/%04d.txt' % i)
+                    print('ERROR:', r'人工填写20181126/%04d.txt' % i)
 
         except FileNotFoundError:
             pass
