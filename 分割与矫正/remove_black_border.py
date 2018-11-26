@@ -14,12 +14,14 @@ def scan_line_method(img: np.ndarray)-> np:
     # display_horizontal_and_vertical_result(horsum, versum, gray)
     # cv2.imshow('二值化', binary)
 
-    # 定义滑动窗口大小
-    win_size = 5        # 窗口大小
-    move_step = 2       # 每步滑动大小
+    # 定义滑动窗口相关参数
+    win_size = 5                # 窗口大小
+    move_step = 2               # 每步滑动大小
+    min_rate_threshold = 0.66   # 保证必须大于最速下降的0.66
     xmin = ymin = 0
     ymax, xmax = img.shape[:2]
 
+    # TODO 可以尝试并行运算
     # 计算横向(左)
     line_scan_result = []
     for start_index in range(0, len(horsum) // 2 - win_size, move_step):
@@ -30,7 +32,7 @@ def scan_line_method(img: np.ndarray)-> np:
         line_scan_result.append(current_win_val)
     # print(line_scan_result)
     line_scan_result.reverse()
-    if max(line_scan_result) > len(versum) * 0.66:  # 保证必须大于最速下降的0.66
+    if max(line_scan_result) > len(versum) * min_rate_threshold:
         xmin = max(xmin, (len(line_scan_result) - line_scan_result.index(max(line_scan_result)) - 1) * move_step + win_size)
     line_scan_result.reverse()
     # print('xmin =', xmin, max(line_scan_result))
@@ -45,7 +47,7 @@ def scan_line_method(img: np.ndarray)-> np:
         line_scan_result.append(current_win_val)
     # print(line_scan_result)
     line_scan_result.reverse()
-    if min(line_scan_result) < -len(versum) * 0.66:
+    if min(line_scan_result) < -len(versum) * min_rate_threshold:
         xmax = min(xmax, len(horsum) // 2 + (len(line_scan_result) - line_scan_result.index(min(line_scan_result)) - 1) * move_step)
     line_scan_result.reverse()
     # print('xmax =', xmax, min(line_scan_result))
@@ -61,7 +63,7 @@ def scan_line_method(img: np.ndarray)-> np:
         line_scan_result.append(current_win_val)
     # print(line_scan_result)
     line_scan_result.reverse()
-    if max(line_scan_result) > len(horsum) * 0.66:
+    if max(line_scan_result) > len(horsum) * min_rate_threshold:
         ymin = max(ymin, (len(line_scan_result) - line_scan_result.index(max(line_scan_result)) - 1) * move_step + win_size)
     line_scan_result.reverse()
     # print('ymin =', ymin)
@@ -76,7 +78,7 @@ def scan_line_method(img: np.ndarray)-> np:
         line_scan_result.append(current_win_val)
     # print(line_scan_result)
     line_scan_result.reverse()
-    if min(line_scan_result) < -len(horsum) * 0.66:
+    if min(line_scan_result) < -len(horsum) * min_rate_threshold:
         ymax = min(ymax, len(versum) // 2 + (len(line_scan_result) - line_scan_result.index(min(line_scan_result)) - 1) * move_step)
     line_scan_result.reverse()
     # print('ymax =', ymax)
