@@ -5,7 +5,7 @@ import cv2
 import time
 
 if __name__ == '__main__':
-    for i in range(147, 293 + 1):
+    for i in range(1, 293 + 1):
         try:
             img = plt.imread(r'人工填写20181122/%04d.jpg' % i)
             print(r'人工填写20181122/%04d.jpg' % i)
@@ -53,7 +53,7 @@ if __name__ == '__main__':
                     print('ERROR:', r'人工填写20181122/%04d.txt' % i)
 
             # 处理投标价（大写）
-            vip_num = img_txt[4].strip()
+            vip_num = img_txt[3].strip()
             for index, val in enumerate(vip_num):
                 #plt.imshow(crop_img['stone_num'][1][index])
                 #plt.show()
@@ -66,7 +66,7 @@ if __name__ == '__main__':
                     print('ERROR:', r'人工填写20181122/%04d.txt' % i)
 
             # 处理会员号码
-            vip_num = img_txt[5].strip()
+            vip_num = img_txt[4].strip()
             for index, val in enumerate(vip_num):
                 #plt.imshow(crop_img['stone_num'][1][index])
                 #plt.show()
@@ -75,6 +75,19 @@ if __name__ == '__main__':
                     file_name = '图片数据库/会员编号/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
                     print(file_name)
                     plt.imsave(file_name, crop_img['Membernum'][1][index])
+                except:
+                    print('ERROR:', r'人工填写20181122/%04d.txt' % i)
+            
+            # 处理电话
+            vip_num = img_txt[5].strip()
+            for index, val in enumerate(vip_num):
+                #plt.imshow(crop_img['stone_num'][1][index])
+                #plt.show()
+                print('val:', val)
+                try:
+                    file_name = '图片数据库/电话/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
+                    print(file_name)
+                    plt.imsave(file_name, crop_img['Memberphone'][1][index])
                 except:
                     print('ERROR:', r'人工填写20181122/%04d.txt' % i)
 
