@@ -19,7 +19,7 @@ if __name__ == '__main__':
                 #plt.show()
                 print('val:', val)
                 try:
-                    file_name = '图片数据库/玉石编号/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
+                    file_name = '图片数据库(原始)/玉石编号/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
                     print(file_name)
                     plt.imsave(file_name, crop_img['stone_num'][1][index])
                 except:
@@ -33,7 +33,7 @@ if __name__ == '__main__':
                 #plt.show()
                 print('val:', val)
                 try:
-                    file_name = '图片数据库/底标价/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
+                    file_name = '图片数据库(原始)/底标价/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
                     print(file_name)
                     plt.imsave(file_name, crop_img['bottomprice'][1][index])
                 except:
@@ -46,7 +46,7 @@ if __name__ == '__main__':
                 #plt.show()
                 print('val:', val)
                 try:
-                    file_name = '图片数据库/投标价(小写)/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
+                    file_name = '图片数据库(原始)/投标价(小写)/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
                     print(file_name)
                     plt.imsave(file_name, crop_img['priceLowercase'][1][index])
                 except:
@@ -59,7 +59,7 @@ if __name__ == '__main__':
                 #plt.show()
                 print('val:', val)
                 try:
-                    file_name = '图片数据库/投标价(大写)/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
+                    file_name = '图片数据库(原始)/投标价(大写)/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
                     print(file_name)
                     plt.imsave(file_name, crop_img['priceUppercase'][1][index])
                 except:
@@ -72,7 +72,7 @@ if __name__ == '__main__':
                 #plt.show()
                 print('val:', val)
                 try:
-                    file_name = '图片数据库/会员编号/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
+                    file_name = '图片数据库(原始)/会员编号/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
                     print(file_name)
                     plt.imsave(file_name, crop_img['Membernum'][1][index])
                 except:
@@ -85,7 +85,7 @@ if __name__ == '__main__':
                 #plt.show()
                 print('val:', val)
                 try:
-                    file_name = '图片数据库/电话/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
+                    file_name = '图片数据库(原始)/电话/' + val + '/' + str(int(time.time() * 1000)) + '.jpg'
                     print(file_name)
                     plt.imsave(file_name, crop_img['Memberphone'][1][index])
                 except:

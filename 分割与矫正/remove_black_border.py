@@ -121,12 +121,18 @@ def display_horizontal_and_vertical_result(horsum, versum, img):
 
 if __name__ == '__main__':
     import os
-    for root, dirs, files in os.walk(r'C:\Users\smile\PycharmProjects\pzyq_HeroReco\sql\图片数据库\会员编号\1'):
+    for root, dirs, files in os.walk(r'C:\Users\smile\PycharmProjects\pzyq_HeroReco\sql\图片数据库(原始)'):
         for file in files:
-            # print(root + '\\' + file)
-            img = plt.imread(root + '\\' + file)
-            cv2.imshow('result', scan_line_method(img))
-            cv2.waitKey(100)
-        # img = plt.imread(root + '\\' + files[9])
-        # cv2.imshow('result', scan_line_method(img))
-        # cv2.waitKey(0)
+            file_path = os.path.join(root, file)
+            print(file_path)
+            new_root = root.replace('原始', '去黑框')
+            new_img = scan_line_method(plt.imread(file_path))
+            #plt.imshow(new_img)
+            #plt.show()
+            plt.imsave(os.path.join(new_root, file), new_img)
+
+        # for file in files:
+        #     # print(root + '\\' + file)
+        #     img = plt.imread(root + '\\' + file)
+        #     plt.imshow(scan_line_method(img), cmap='gray')
+        #     plt.show()
