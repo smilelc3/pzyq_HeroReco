@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 from 分割与矫正.reverse_recognition import is_reverse_detection
-from 分割与矫正.edge_fixedposition_cutting import cutting, zfcutfixde_show
+from 分割与矫正.edge_fixedposition_cutting import cutting, zfcutfixded_show
 import cv2
 import time
 
