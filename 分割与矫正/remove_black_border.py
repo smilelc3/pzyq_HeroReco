@@ -17,9 +17,9 @@ def scan_line_method(img: np.ndarray, iteration=2)-> np:
     # plt.show()
 
     # 定义滑动窗口相关参数
-    win_size =  7               # 窗口大小
+    win_size = 7                # 窗口大小
     move_step = 3               # 每步滑动大小
-    min_rate_threshold = 0.66   # 保证必须大于最速下降的0.66
+    min_rate_threshold = 0.9    # 保证必须大于最速下降的比重
     xmin = ymin = 0
     ymax, xmax = img.shape[:2]
 
@@ -134,3 +134,10 @@ if __name__ == '__main__':
             # plt.show()
             plt.imsave(os.path.join(new_root, file), new_img)
 
+    # file_path = r'C:\Users\smile\PycharmProjects\pzyq_HeroReco\sql\图片数据库(原始)\底标价\4\1543157817504.jpg'
+    # raw_img = plt.imread(file_path)
+    # plt.imshow(raw_img)
+    # plt.show()
+    # new_img = scan_line_method(plt.imread(file_path), iteration=2)  # 算法迭代两次最佳
+    # plt.imshow(new_img)
+    # plt.show()

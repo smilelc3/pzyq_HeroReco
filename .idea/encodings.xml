@@ -105,8 +105,8 @@
     <file url="file://$PROJECT_DIR$/sql/人工填写20181122/0110.txt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sql/人工填写20181122/0117.txt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sql/人工填写20181122/0147.txt" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/识别算法/keras_99-45.py" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/识别算法/mnist_tf-99-25.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/识别算法/MNIST_data/keras_99-45/keras_99-45.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/识别算法/MNIST_data/mnist_tf-99-25.py" charset="UTF-8" />
     <file url="PROJECT" charset="GBK" />
   </component>
 </project>

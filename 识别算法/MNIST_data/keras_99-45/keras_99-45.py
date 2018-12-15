@@ -15,14 +15,12 @@ from keras.utils.vis_utils import plot_model
 np.random.seed(8)    #设置随机种子，保证每次随机数相同
 
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
-print("X_train original shape", X_train.shape)
-print("y_train original shape", y_train.shape)
-print("X_test original shape", X_test.shape)
-print("y_test original shape", y_test.shape)
 
-plt.imshow(X_train[0], cmap='gray')
-plt.title('Class ' + str(y_train[0]))
-plt.show()
+
+# for i in range(20):
+#     plt.imshow(X_train[i], cmap='gray')
+#     plt.title('Class ' + str(y_train[i]))
+#     plt.show()
 
 
 X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
@@ -34,14 +32,18 @@ X_test = X_test.astype('float32')
 X_train /= 255      # 归一化
 X_test /= 255       # 归一化
 
-print(X_train.shape)
-
 
 number_of_classes = 10
 # one-hot 转型
 Y_train = np_utils.to_categorical(y_train, number_of_classes)
 Y_test = np_utils.to_categorical(y_test, number_of_classes)
 
+print("X_train original shape", X_train.shape)
+print("X_test original shape", X_test.shape)
+print("y_train original shape", y_train.shape)
+print("y_test original shape", y_test.shape)
+print("Y_train original shape", Y_train.shape)
+print("Y_test original shape", Y_test.shape)
 print(y_train[0], Y_train[0])
 
 
@@ -122,3 +124,7 @@ model.fit_generator(train_generator, steps_per_epoch=60000//64, epochs=5,
 
 score = model.evaluate(X_test, Y_test)
 print('Test accuracy: ', score[1])
+
+model.save('model-99-45.h5')
+
+
