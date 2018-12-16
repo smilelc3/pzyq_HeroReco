@@ -16,7 +16,7 @@ def get_main_part(img: np)-> np:
     imgray = cv2.bitwise_not(imgray)
     # 膨胀
     kernel = np.ones((4, 4), np.uint8)
-    dilation = cv2.dilate(imgray, kernel, iterations=1)
+    dilation = cv2.dilate(imgray, kernel, iterations=2)     #多次迭代，可使非连续区间联通
     # 二值化
     ret, thresh = cv2.threshold(dilation, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     # plt.imshow(dilation, cmap='gray')
