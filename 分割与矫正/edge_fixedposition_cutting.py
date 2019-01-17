@@ -14,7 +14,6 @@ def cutting(img:np):
         sigmaColor：颜色空间的标准方差，一般尽可能大；
         sigmaSpace：坐标空间的标准方差(像素单位)，一般尽可能小。
     """
-
     if is_reverse_detection(img):
         img = cv2.flip(img, -1)     # 水平垂直翻转
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)

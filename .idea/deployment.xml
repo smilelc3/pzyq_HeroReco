@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="工三401" createEmptyFolders="true">
+  <component name="PublishConfigData" autoUpload="Always" serverName="Copy of project-level server 'SuperMicro'" createEmptyFolders="true">
     <serverData>
-      <paths name="工三401">
+      <paths name="Copy of project-level server 'SuperMicro'">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/test/公共的/LRLpzyq_HeroReco" local="$PROJECT_DIR$" />
+            <mapping deploy="/tmp/pycharm_project_258" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="SuperMicro">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
