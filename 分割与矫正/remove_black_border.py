@@ -7,8 +7,8 @@ import cv2
 
 # 基于扫描线的算法
 def scan_line_method(img: np.ndarray, iteration=2)-> np:
-    gray = cv2.cvtColor(np.asarray(img),cv2.COLOR_RGB2GRAY)
-    _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    img_grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    _, binary = cv2.threshold(img_grey, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     binary = 255 - binary   # 做反色处理
     horsum, versum = get_image_horizontal_and_vertical_sum(binary)
     # 图像展示

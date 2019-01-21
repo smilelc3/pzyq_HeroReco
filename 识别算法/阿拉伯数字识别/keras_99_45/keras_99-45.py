@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 from keras.datasets import mnist
 from keras.models import Sequential

@@ -14,7 +14,7 @@ from PIL import Image
 X_test = []
 y_test = []
 
-for root, dirs, files in os.walk(r'/home/test/tmp/pycharm_project_369/sql/图片数据库(标准化)'):
+for root, dirs, files in os.walk(r'C:\Users\smile\PycharmProjects\pzyq_HeroReco\sql\图片数据库(标准化)'):
     for file in files:
         file_path = os.path.join(root, file)
         _root, num_dir = os.path.split(root)

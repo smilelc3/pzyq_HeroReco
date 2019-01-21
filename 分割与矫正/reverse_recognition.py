@@ -8,6 +8,8 @@ import cv2
 tolerance_size = 60
 
 def is_reverse_detection(img: np)-> bool:
+    # 标准化
+    img = cv2.resize(img, (2480, 1748), interpolation=cv2.INTER_CUBIC)
     # 切割左上小块
     flag_img = img[69 - tolerance_size:134 + tolerance_size, 69 - tolerance_size: 134 + tolerance_size]
     # 灰度二值化
@@ -33,7 +35,6 @@ if __name__ == '__main__':
     for i in range(1, 273 + 1):
         try:
             img = plt.imread(r'人工填写20181122/%04d.jpg'%i)
-            crop_img = cv2.resize(img, (2480, 1748), interpolation=cv2.INTER_CUBIC)
-            print(is_reverse_detection(crop_img))
+            print(is_reverse_detection(img))
         except FileNotFoundError:
             pass
