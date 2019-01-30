@@ -10,9 +10,8 @@ from matplotlib import pyplot as plt
 from keras.models import load_model
 
 class Recognition:
-    def __init__(self, original_image: np, num_model_path: str):
-        self.image = original_image
-        self.is_need_flip = is_reverse_detection(original_image)
+    def __init__(self, num_model_path: str):
+        self.is_need_flip = False
         self.remove_border_iteration = 2
         self.NUM_SIZE = (28, 28)
         self.ZH_SIZE = (140, 140)
@@ -21,7 +20,9 @@ class Recognition:
         self.parts_result = {}      # 存储识别结果
 
     # 获取切割图部分
-    def get_parts_img(self):
+    def get_parts_img(self, original_image: np):
+        self.image = original_image
+        self.is_need_flip = is_reverse_detection(original_image)
         parts = {}
         if self.is_need_flip is True:
             parts = cutting(cv2.flip(self.image, -1))
@@ -144,6 +145,6 @@ if __name__ == '__main__':
     img_path = r'C:\Users\smile\PycharmProjects\pzyq_HeroReco\sql\人工填写20181122\0003.jpg'
     img = plt.imread(img_path)
     num_model_path = r'C:\Users\smile\PycharmProjects\pzyq_HeroReco\识别算法\阿拉伯数字识别\keras_99_45\model-99-45_add_my.h5'
-    recognitionTest = Recognition(img, num_model_path=num_model_path)
-    recognitionTest.get_parts_img()
+    recognitionTest = Recognition(num_model_path=num_model_path)
+    recognitionTest.get_parts_img(img)
     print(recognitionTest.get_recognition_results())
