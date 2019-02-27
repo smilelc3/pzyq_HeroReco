@@ -20,6 +20,9 @@ def get_all_img_path(path)->list:
     result = []
     for root, _dirs, files in os.walk(path):
         for file in files:
+            _, extension = os.path.splitext(file)
+            if extension != '.jpg':
+                continue
             img_path = os.path.join(root, file)
             result.append(img_path)
     return result
@@ -27,7 +30,7 @@ def get_all_img_path(path)->list:
 # 写数据进程执行的代码:
 def producer(queue:Queue, event:Event):
     event.set()         # 设置进程启动，进入运行状态
-    for item in get_all_img_path('单据扫描20180927'):
+    for item in get_all_img_path(r'C:\Users\smile\PycharmProjects\pzyq_HeroReco\sql\人工填写20181122'):
         img = read_img_to_np(item)
         while queue.qsize() >= MAX_QUEUE_SIZE:
             event.wait()    # 超过最大队列数，等待
@@ -41,8 +44,9 @@ def consumer(queue:Queue, event:Event):
         print('Queue size:', queue.qsize(), '写入进程运行中?', event.is_set())
         if not queue.empty():
             item: PipeImg = queue.get()
-            plt.imshow(item.np_img)
-            plt.show()
+            # plt.imshow(item.np_img)
+            # plt.show()
+            print(item.shape)
         elif event.is_set() == False:   # 如果队列空且生产者已阻塞，认为已完成
             print('done!')
             return
@@ -52,8 +56,8 @@ if __name__=='__main__':
     # 父进程创建Queue，并传给各个子进程：
     img_queue = Queue()
     img_event = Event()
-    input_q = Process(target=producer, args=(img_queue,img_event))
-    output_q = Process(target=consumer, args=(img_queue,img_event))
+    input_q = Process(target=producer, args=(img_queue, img_event))
+    output_q = Process(target=consumer, args=(img_queue, img_event))
 
     time1 = time.time()
     # 启动子进程input_q，写入:

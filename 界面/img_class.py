@@ -2,10 +2,11 @@
 import numpy
 import time
 
+
 class PipeImg:
-    def __init__(self, cv2Img:numpy):
-        self.np_img = cv2Img                   # numpy初始化
-        self.shape = cv2Img.shape           # 图片尺寸数据
+    def __init__(self, Img:numpy):
+        self.np_img = Img                   # numpy初始化
+        self.shape = Img.shape           # 图片尺寸数据
         self.create_time = time.time()       # 记录入pipe时间
         self.is_ident = False                # 记录是否能够识别
         self.num = -1,
@@ -16,7 +17,9 @@ class PipeImg:
         self.phone_num = -1
         self.vip_name = -1
         self.remark = ''
+        # 加载模型
 
+    # 相关识别参数设置
     def set_tender_data(self,
                         num:str,                # 玉石编号
                         bottom_price:int,       # 地标价
@@ -37,6 +40,8 @@ class PipeImg:
         self.remark =remark
 
 
+
+    # 获取表单数据
     def get_tender_data(self)->list:
         try:
             self.is_ident = True
@@ -46,3 +51,4 @@ class PipeImg:
         # TODO 错误处理机制
         except AttributeError:
             print('无法识别该扫描单')
+

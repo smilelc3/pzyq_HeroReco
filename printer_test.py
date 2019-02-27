@@ -25,7 +25,6 @@ class EventHandler:
             print(" time:{:2.1f}, dib:{}".format(t2 - t1, dib))
             t1 = t2
 
-            # TODO
             # 2 to send to recongnize pipe
 
 

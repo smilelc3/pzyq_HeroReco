@@ -14,7 +14,6 @@ def cutting(img:np):
         sigmaColor：颜色空间的标准方差，一般尽可能大；
         sigmaSpace：坐标空间的标准方差(像素单位)，一般尽可能小。
     """
-
     if is_reverse_detection(img):
         img = cv2.flip(img, -1)     # 水平垂直翻转
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -40,8 +39,8 @@ def cutting(img:np):
     closed = cv2.erode(closed, None, iterations=4)  # 腐蚀图像
     closed = cv2.dilate(closed, None, iterations=1)  # 膨胀图像
 
-    # 这里opencv3返回的是三个参数
-    (_, cnts, _) = cv2.findContours(closed.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)  # 寻找轮廓
+    # 这里opencv3返回的是三个参数, opencv 4.0返回两个参数
+    cnts, _ = cv2.findContours(closed.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)  # 寻找轮廓
     c = sorted(cnts, key=cv2.contourArea, reverse=True)[0]
     # compute the rotated bounding box of the largest contour
     rect = cv2.minAreaRect(c)  # 返回点集cnt的最小外接矩形
@@ -140,24 +139,25 @@ def zfcutfixde_show(result_img: np):
     Members_phone = result_img['Memberphone']
 
     plt.subplot(421)
-    plt.imshow(stone_num[1][0])
+    plt.imshow(stone_num[0])
     plt.subplot(422)
-    plt.imshow(bottomprice[1][2])
+    plt.imshow(bottomprice[0])
     plt.subplot(423)
-    plt.imshow(bid_prices_Lowercase[1][4])
+    plt.imshow(bid_prices_Lowercase[0])
+
     plt.subplot(424)
-    plt.imshow(bid_prices_Uppercase[1][2])
+    plt.imshow(bid_prices_Uppercase[0])
     plt.subplot(425)
-    plt.imshow(Members_num[1][4])
+    plt.imshow(Members_num[0])
     plt.subplot(426)
-    plt.imshow(Members_phone[1][3])
+    plt.imshow(Members_phone[0])
     plt.subplot(427)
-    plt.imshow(Members_name[1][3])
+    plt.imshow(Members_name[0])
     plt.show()
 
 
 if __name__ == '__main__':
-    img = plt.imread(r'0001.jpg')
+    img = plt.imread(r'C:\Users\smile\PycharmProjects\pzyq_HeroReco\sql\人工填写20181122\0001.jpg')
     crop_img = cutting(img)
 
     zfcutfixde_show(crop_img)
