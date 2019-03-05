@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Copy of project-level server 'SuperMicro'" createEmptyFolders="true">
+  <component name="PublishConfigData" autoUpload="Always" createEmptyFolders="true">
     <serverData>
-      <paths name="Copy of project-level server 'SuperMicro'">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/tmp/pycharm_project_258" local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="SuperMicro">
+      <paths name="robot">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -17,5 +10,6 @@
         </serverdata>
       </paths>
     </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>
