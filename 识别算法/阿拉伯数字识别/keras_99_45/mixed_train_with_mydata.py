@@ -16,7 +16,7 @@ from keras.utils.vis_utils import plot_model
 # %%加载自有数据
 X_my = []
 y_my = []
-for root, dirs, files in os.walk(r'/home/test/tmp/pycharm_project_369/sql/图片数据库(标准化)'):
+for root, dirs, files in os.walk(r'C:\Users\smile\PycharmProjects\pzyq_HeroReco\sql\图片数据库(标准化)'):
     for file in files:
         file_path = os.path.join(root, file)
         _root, num_dir = os.path.split(root)
@@ -91,10 +91,11 @@ Y_test = np.append(Y_test, Y_my[Y_my.shape[0] // 6 * 5 + 1: , ], axis=0)
 
 model = Sequential()
 
+# model.add(BatchNormalization(axis=-1))
 model.add(Conv2D(filters=32, kernel_size=(3, 3), input_shape=(28, 28, 1))) # 输入28*28,1代表灰度
 # 需训练的参数：3*3*1*32 + 32 = 320                        # 1代表输入深度
 model.add(Activation('relu'))                           # relu激活
-BatchNormalization(axis=1)                              # 批量标准化
+model.add(BatchNormalization(axis=-1))                        # 批量标准化
 
 model.add(Conv2D(filters=32, kernel_size=(3, 3)))       # 因采用3*3卷积核，正常卷积，输出dim(26-2)*(26-2)*32
 # 需训练的参数：3*3*32* 32 + 32 = 9248                     # 32代表偏置
@@ -102,7 +103,7 @@ model.add(Conv2D(filters=32, kernel_size=(3, 3)))       # 因采用3*3卷积核�
 model.add(Activation('relu'))                           # relu激活
 
 model.add(MaxPooling2D(pool_size=(2, 2)))               # max poling池化，di = 12*12*32
-BatchNormalization(axis=1)                              # 归一化
+model.add(BatchNormalization(axis=-1))                         # 归一化
 
 model.add(Conv2D(filters=64, kernel_size=(3, 3)))
 # 需训练的参数：3*3*32 * 64 + 64 = 18496
@@ -117,7 +118,7 @@ model.add(MaxPooling2D(pool_size=(2,2)))
 
 model.add(Flatten())
 # Flatten层用来将输入“压平”，即把多维的输入一维化，常用在从卷积层到全连接层的过渡。Flatten不影响batch的大小。
-BatchNormalization(axis=-1)
+model.add(BatchNormalization(axis=-1))
 #压扁后的数据dim 4*4*64 = 1024
 
 model.add(Dense(units=512))
@@ -125,7 +126,7 @@ model.add(Dense(units=512))
 model.add(Dropout(0.2))
 
 model.add(Activation('relu'))
-BatchNormalization(axis=-1)
+model.add(BatchNormalization(axis=-1))
 
 model.add(Dropout(0.2))
 
